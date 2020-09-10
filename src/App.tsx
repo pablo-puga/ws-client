@@ -1,32 +1,24 @@
 import React from 'react';
+import { HashRouter, Route, NavLink } from 'react-router-dom';
 
-import underCostruction from './under-construction.jpg';
+import About from './pages/About';
+import Help from './pages/Help';
+import WSClient from './pages/WSClient';
 
 const App: React.FC = () => {
     return (
-        <article className="h-screen w-full mx-auto px-5 pt-5 sm:pt-10 md:pt-15 lg:pt-20 xl:pt-25 font-sans text-center bg-gray-200">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium text-gray-900">
-                WebSockets Client
-            </h1>
-            <h2 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-gray-700">
-                Simple WebSockets Client for development purposes.
-            </h2>
-            <img
-                src={underCostruction}
-                alt="Under Construction"
-                className="w-full max-w-4xl mt-10 mx-auto shadow-xs md:shadow-sm lg:shadow-lg"
-            />
-            <small className="block pt-8 text-gray-600 md:text-base">
-                By&nbsp;
-                <a
-                    href="https://github.com/pablo-puga"
-                    title="Pablo Puga GitHub Profile"
-                    className="font-medium hover:text-gray-900 transition-colors duration-300"
-                >
-                    Pablo Puga
-                </a>
-            </small>
-        </article>
+        <HashRouter basename="/">
+            <nav>
+                <ul>
+                    <li><NavLink to="/">WebSockets Client</NavLink></li>
+                    <li><NavLink to="/about">About</NavLink></li>
+                    <li><NavLink to="/help">Help</NavLink></li>
+                </ul>
+            </nav>
+            <Route exact path="/" component={WSClient}/>
+            <Route exact path="/about" component={About}/>
+            <Route exact path="/help" component={Help}/>
+        </HashRouter>
     );
 };
 

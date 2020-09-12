@@ -7,8 +7,9 @@ import WSClient from './pages/WSClient';
 
 const Header: React.FC = () => {
     return (
-        <header>
-            <h1>WebSockets Client</h1>
+        <header className="w-full flex flex-row justify-between items-center px-2 py-1 md:px-3 md:py-2 bg-green-400 bg-opacity-75 transition-all duration-75 md:shadow">
+            <h1 className="text-base font-bold text-gray-800">WebSockets Client</h1>
+            <span className="text-sm font-medium text-gray-700">v{process.env.REACT_APP_VERSION}</span>
         </header>
     );
 };

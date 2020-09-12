@@ -1,5 +1,5 @@
 import React from 'react';
-import { HashRouter, Route, NavLink } from 'react-router-dom';
+import { HashRouter, Route, NavLink, Switch } from 'react-router-dom';
 
 import About from './pages/About';
 import Help from './pages/Help';
@@ -14,19 +14,33 @@ const Header: React.FC = () => {
     );
 };
 
+type NavElementProps = {
+    path: string;
+    name: string;
+};
+
+const NavElement: React.FC<NavElementProps> = ({ path, name }) => {
+    return (
+        <li className="px-3 py-1">
+            <NavLink
+                exact={true}
+                to={path}
+                className="transition-all duration-100 border-b-solid border-b-2 border-transparent hover:border-gray-500"
+                activeClassName="font-semibold border-green-400"
+            >
+                {name}
+            </NavLink>
+        </li>
+    );
+};
+
 const Navigation: React.FC = () => {
     return (
-        <nav>
-            <ul>
-                <li>
-                    <NavLink to="/">WebSockets Client</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/about">About</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/help">Help</NavLink>
-                </li>
+        <nav className="w-full mt-2">
+            <ul className="flex flex-row justify-center md:text-lg">
+                <NavElement path="/" name="Client" />
+                <NavElement path="/about" name="About" />
+                <NavElement path="/help" name="Help" />
             </ul>
         </nav>
     );
@@ -54,9 +68,11 @@ const App: React.FC = () => {
         <HashRouter basename="/">
             <Header />
             <Navigation />
-            <Route exact path="/" component={WSClient} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/help" component={Help} />
+            <Switch>
+                <Route exact path="/" component={WSClient} />
+                <Route path="/about" component={About} />
+                <Route path="/help" component={Help} />
+            </Switch>
             <Footer />
         </HashRouter>
     );
